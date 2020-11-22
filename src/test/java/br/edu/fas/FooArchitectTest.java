@@ -17,6 +17,28 @@ public class FooArchitectTest {
     JavaClasses importedClasses = new ClassFileImporter().importPackages("br.edu.fas");
 
     @Test
+    public void verificarDependenciasParaCamadaNegocios() {
+
+        ArchRule rule = classes()
+        .that().resideInAPackage("..business..")
+        .should().onlyHaveDependentClassesThat().resideInAnyPackage("..business..", "..service..");    
+
+        rule.check(importedClasses);
+
+    }
+
+    @Test
+    public void verificarDependenciasDaCamadaServico() {
+
+        ArchRule rule = noClasses()
+        .that().resideInAPackage("..service..")
+        .should().dependOnClassesThat().resideInAnyPackage("..business..");
+
+        rule.check(importedClasses);
+
+    }
+
+    @Test
     public void verificarDependenciasParaCamadaPersistencia() {
 
         ArchRule rule = classes()

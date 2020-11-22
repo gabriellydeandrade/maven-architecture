@@ -1,11 +1,10 @@
 package br.edu.fas.business;
 
-// import br.edu.fas.persistence.Dao;
-// import br.edu.fas.persistence.FooDao;
+import br.edu.fas.service.FooService;
 
 public class Foo {
 
-    // FooDao fooDao = new FooDao();
+    FooService foo = new FooService();
 
     
 }
